@@ -296,8 +296,8 @@ def draw_top_view_reportlab(
             stroke=1, fill=0
         )
 
-        # FX hem in TOP VIEW: two 3/16" strips along the long sides
-        hem_w_in = 0.125  # 3/16"
+        # FX hem in TOP VIEW: two strips along the long sides
+        hem_w_in = 0.125
         hem_h = P(hem_w_in)
 
         c.setLineWidth(1)
@@ -880,9 +880,9 @@ def make_top_view_svg(A_in, flange_in, outlets_from_right_in, px_per_in=32):
             f'fill="none" stroke="#000" stroke-width="1"/>'
         )
 
-    # FX hem in TOP VIEW: two 3/16" strips along the long sides
+    # FX hem in TOP VIEW: two strips along the long sides
     if is_no_flange:  # FX
-        hem_w_in = 0.125  # 3/16"
+        hem_w_in = 0.125  
         hem_h_px = hem_w_in * px_per_in
 
         # Top hem strip
@@ -1069,7 +1069,27 @@ def make_front_view_svg(A_in, flange_in, outlets_from_right_in, px_per_in=32, mo
     svg.append('</svg>')
     return "\n".join(svg)
 
+# -----------------------------
+# Landing / title screen state
+# -----------------------------
+if "started" not in st.session_state:
+    st.session_state["started"] = False
 
+# If NOT started → show the landing page and STOP
+if not st.session_state["started"]:
+    st.markdown("""
+        <div style="text-align:center; margin-top:60px;">
+            <img src="https://uploads-ssl.webflow.com/61dd080b3d2f9fec43b08948/61e5d398a2373f0282831465_InfinityDrainLogo_blk.png" width="220"/>
+            <h2>Custom Configurator</h2>
+            <p>Generate shop drawings and sign-offs for FX, FF, FCS, and FCB channels.</p>
+        </div>
+    """, unsafe_allow_html=True)
+
+    if st.button("▶️ Begin", use_container_width=True):
+        st.session_state["started"] = True
+        st.rerun()  # Immediately refresh into configurator mode
+
+    st.stop()  # Do NOT render anything else
 
 # -----------------------------
 # UI
