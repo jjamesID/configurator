@@ -1097,6 +1097,10 @@ if not st.session_state["started"]:
 left_col, right_col = st.columns([7, 5])
 
 with right_col:
+    st.write("")
+    st.write("")
+    st.write("")
+    st.write("")
     st.title("Custom Configurator")
     st.divider()
     model_code = st.selectbox("Select Series", list(MODELS.keys()),
