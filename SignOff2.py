@@ -21,11 +21,19 @@ from reportlab.lib.pagesizes import LETTER, landscape
 from reportlab.lib import colors
 from PyPDF2 import PdfReader, PdfWriter
 
+st.set_page_config(
+    page_title="Custom Configurator",
+    page_icon="data:image/webp;base64,UklGRsQBAABXRUJQVlA4ILgBAABwCwCdASpeAEEAPpU8mEglo6KhOZK4ALASiWknAAH1JnmL9J8AO4GL6aQ2miTG/KUa/r8UXmoN7tYlkK5c3GcGPT7TCNFnNdBsILHcYm3BkleZOlLmRz4vVOpSXVmniD//mWfAAP7+Ez/7P/imicc935CwIgCZjjtdS+Yj+uQbCd+46ta9+Pkcq4mQho9uR+47jfnP/xcwWYWlL/H5RVaENfGC+/Y/4qR9KqEWU1Yh215efqxknue2lo5/7JpB9Fz2b3h3D58BpLGvKVuxgsCgJOqht69AuKOBHP6zE80Rql3AR2WY35dysbv+oKphQITrjymuCBtwQO9sX/UnOAo1G8DD7OLHsmj29BvOdKg6rhie2qkwwn/2aafOm1CH220iw+dQi6MeyhJ//0X6dKSxpOtuKOq3MdRo6LFEDrjWevODNE8fTI+jgc+qlPBl8/HbhVp4LNse9tsGe9I+ehHF+sqqGOlO7duiwejalxNGBu76PUwUP98+CpijLWs9oZphl0y1n/SNBOecqxx3ZEgeWsS+F57XP/1PS//KBstAINtpV2/Wrntx38Daf9GvB2jm7e8evQAAAA==",
+    layout="centered",
+)
+
 # -----------------------------
 # Branding
 # -----------------------------
 st.logo('https://uploads-ssl.webflow.com/61dd080b3d2f9fec43b08948/61e5d398a2373f0282831465_InfinityDrainLogo_blk.png')
 st.write("")
+
+
 
 # -----------------------------
 # Constants
