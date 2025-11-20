@@ -28,131 +28,93 @@ st.set_page_config(
 )
 
 st.markdown("""
-    <style>
-        /* Tighten top & bottom padding of main content */
-        div.block-container {
-            padding-top: 0.0rem !important;
-            padding-bottom: 0.0rem !important;
-            max-width: 1400px;
-        }
+<style>
+/* Reduce top padding on main page */
+.block-container {
+    padding-top: 0rem !important;
+    padding-bottom: 0rem !important;
+}
 
-        /* Slightly tighten sidebar padding too */
-        section[data-testid="stSidebar"] > div {
-            padding-top: 0.25rem !important;
-            padding-bottom: 0.25rem !important;
-        }
+/* Reduce header padding from Streamlit layout */
+header[data-testid="stHeader"] {
+    height: 40px !important;
+}
 
-        /* Background gradient for the app (subtle) */
-        .main {
-            background: radial-gradient(circle at top left, #f5f7fb 0, #e5e9f2 40%, #f8fafc 100%);
-        }
+/* Tighten spacing between elements inside the main container */
+section.main > div {
+    padding-top: 0.3rem !important;
+}
+</style>
+""", unsafe_allow_html=True)
 
-        /* Landing layout */
-        .id-landing-wrapper {
-            min-height: 70vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
+st.markdown("""
+<style>
+    /* Drawing containers with enhanced styling */
+    .drawing-card {
+        background: white;
+        border-radius: 12px;
+        overflow: hidden;
+        border: 1px solid rgba(226, 232, 240, 0.8);
+        box-shadow: 0 2px 8px rgba(15, 23, 42, 0.06);
+        transition: all 0.2s ease;
+        margin-bottom: 16px;
+    }
 
-        .id-landing-card {
-            background: #ffffff;
-            border-radius: 20px;
-            padding: 32px 28px 26px 28px;
-            max-width: 640px;
+    .drawing-card:hover {
+        box-shadow: 0 4px 16px rgba(15, 23, 42, 0.1);
+        border-color: rgba(148, 163, 184, 0.3);
+    }
+
+    .drawing-label {
+        background: linear-gradient(135deg, #000000, #1f2937);
+        color: #f9fafb;
+        padding: 12px 16px;
+        font-weight: 600;
+        font-size: 0.9rem;
+        letter-spacing: 0.05em;
+    }
+
+    .drawing-content {
+        padding: 16px;
+        min-height: 320px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: #f8fafc;
+    }
+
+    /* Enhanced download button with same gradient */
+    .stDownloadButton > button {
             width: 100%;
-            box-shadow: 0 24px 60px rgba(15, 23, 42, 0.25);
-            border: 1px solid rgba(148, 163, 184, 0.35);
-            text-align: left;
-        }
-
-        .id-landing-pill {
-            display: inline-flex;
-            align-items: center;
-            gap: 6px;
-            padding: 4px 12px;
-            border-radius: 999px;
-            background: #0f172a;
-            color: #e5e7eb;
-            font-size: 11px;
-            letter-spacing: 0.14em;
-            text-transform: uppercase;
-            margin-bottom: 10px;
-        }
-
-        .id-landing-pill span {
-            width: 7px;
-            height: 7px;
-            border-radius: 999px;
-            background: #22c55e;
-            display: inline-block;
-        }
-
-        .id-landing-title {
-            font-size: 1.6rem;
-            font-weight: 700;
-            color: #0f172a;
-            margin-bottom: 4px;
-        }
-
-        .id-landing-subtitle {
-            font-size: 0.96rem;
-            color: #4b5563;
-            margin-bottom: 16px;
-        }
-
-        .id-landing-meta {
-            font-size: 0.8rem;
-            text-transform: uppercase;
-            letter-spacing: 0.12em;
-            color: #6b7280;
-            margin-bottom: 12px;
-        }
-
-        .id-landing-bullets {
-            font-size: 0.9rem;
-            color: #374151;
-            margin-bottom: 18px;
-        }
-
-        .id-landing-bullets li {
-            margin-bottom: 4px;
-        }
-
-        .id-landing-footer {
-            font-size: 0.75rem;
-            color: #9ca3af;
-            margin-top: 10px;
-        }
-
-        /* Global button styling (Begin + Download look nice) */
-        .stButton > button {
             border-radius: 999px;
             border: none;
-            padding: 0.6rem 1.4rem;
+            padding: 0.75rem 1.4rem;
             font-size: 0.9rem;
             font-weight: 600;
-            letter-spacing: 0.08em;
+            letter-spacing: 0.06em;
             text-transform: uppercase;
-            background: linear-gradient(120deg, #111827, #0ea5e9);
+
+            background: linear-gradient(135deg, #000000, #1f2937);
             color: #f9fafb;
-            box-shadow: 0 10px 30px rgba(15, 23, 42, 0.45);
+
+            box-shadow: 0 8px 18px rgba(0,0,0,0.35);
             cursor: pointer;
             transition: transform 0.12s ease, box-shadow 0.12s ease, opacity 0.12s ease;
-        }
+    }
 
-        .stButton > button:hover {
+    .stDownloadButton > button:hover {
             transform: translateY(-1px);
-            box-shadow: 0 16px 40px rgba(15, 23, 42, 0.6);
-            opacity: 0.98;
-        }
+            box-shadow: 0 12px 26px rgba(0,0,0,0.5);
+            opacity: 0.97;
+            color: #6a6c6e;   /* text shifts to gray */
+    }
 
-        .stButton > button:active {
+    .stDownloadButton > button:active {
             transform: translateY(0);
             box-shadow: 0 8px 20px rgba(15, 23, 42, 0.5);
             opacity: 0.96;
-        }
-    </style>
+    }
+</style>
 """, unsafe_allow_html=True)
 
 # -----------------------------
@@ -620,20 +582,36 @@ def draw_front_view_reportlab(
                                             outlets_from_right), start=1):
         cx = ox + P(geom.flange_in) + P(x_left)
 
-        # --- outlet body (always solid black) ---
+        # --- outlet body ---
         c.setStrokeColor(colors.black)
         c.setLineWidth(1)
+
+        outlet_x = cx - drop_w / 2
+        outlet_y = base_y + P(tray_thick_in)
+        outlet_h = P(drop_in)
+
+        # draw the outer rectangle
         c.rect(
-            cx - drop_w/2,
-            base_y + P(tray_thick_in),
+            outlet_x,
+            outlet_y,
             drop_w,
-            P(drop_in),
-            stroke=1, fill=0
+            outlet_h,
+            stroke=1,
+            fill=0
         )
+
+        # --- Threading (Option A: parallel lines) for FX / FCB ---
+        if geom.model_code in ("FX", "FCB"):
+            num_threads = 18  # adjust to taste
+            c.setLineWidth(0.6)
+            for j in range(num_threads):
+                y_line = outlet_y + outlet_h * (j + 0.5) / num_threads
+                c.line(outlet_x, y_line, outlet_x + drop_w, y_line)
 
         # --- CL line (light grey) ---
         c.setStrokeColor(colors.Color(0, 0, 0, alpha=0.35))
         c.setLineWidth(0.8)
+
         c.line(
             cx, base_y - P(0.15),
             cx, base_y + P(tray_thick_in + drop_in) + P(0.15)
@@ -1139,7 +1117,28 @@ def make_front_view_svg(A_in, flange_in, outlets_from_right_in, px_per_in=32, mo
     for o_right in outlets_from_right_in:
         cx_list.append(iv_left + (A_in - o_right) * px_per_in)
     for cx in cx_list:
-        svg.append(f'<rect x="{cx - 18:.2f}" y="{margin_px + vertical_offset + 114.5:.2f}" width="36" height="{drop_px - 36:.2f}" fill="none" stroke="#000" stroke-width="1"/>')
+        # Outlet body rectangle
+        outlet_x = cx - 18
+        outlet_y = margin_px + vertical_offset + 100 + tray_th
+        outlet_w = 36
+        outlet_h = drop_px - 36
+
+        svg.append(
+            f'<rect x="{outlet_x:.2f}" y="{outlet_y:.2f}" '
+            f'width="{outlet_w:.2f}" height="{outlet_h:.2f}" '
+            f'fill="none" stroke="#000" stroke-width="1"/>'
+        )
+
+        # --- Threading (Option A: parallel lines) for FX / FCB only ---
+        if model_code in ("FX", "FCB"):
+            num_threads = 12  # tweak density if you want
+            for i in range(num_threads):
+                y_line = outlet_y + outlet_h * (i + 0.5) / num_threads
+                svg.append(
+                    f'<line x1="{outlet_x:.2f}" y1="{y_line:.2f}" '
+                    f'x2="{(outlet_x + outlet_w):.2f}" y2="{y_line:.2f}" '
+                    f'stroke="#000" stroke-width="0.7" />'
+                )
 
     # --- Centerlines (CL) for each outlet (scaled) ---
     tray_thick_px = max(2.0, 0.5 * px_per_in)
@@ -1289,7 +1288,7 @@ if not st.session_state["started"]:
             transform: translateY(-1px);
             box-shadow: 0 12px 26px rgba(0,0,0,0.5);
             opacity: 0.97;
-            color: #d1d5db;   /* text shifts to light gray */
+            color: #6a6c6e;   /* text shifts to gray */
         }
         .stButton > button:active {
             transform: translateY(0px);
@@ -1542,30 +1541,32 @@ if outlets and all(isinstance(v, (float, int)) for v in outlets):
                         svg_front = make_front_view_svg(A_in, flange_in_ui, outlets, model_code=model_code)
 
                         # Fixed-size styled containers - drawing scales inside
-                        top_container = f"""
-                        <div style="border:1px solid #ddd;border-radius:8px;padding:10px;margin-bottom:12px;height:320px;display:flex;flex-direction:column;">
-                        <div style="font:bold 12px Helvetica, Arial; margin: 2px 0 8px 0;">TOP VIEW</div>
-                        <div style="flex:1;display:flex;align-items:center;justify-content:flex-start;">
-                        {svg_top}
+                        st.markdown(f"""
+                        <div class="drawing-card" style="height: 350px;">
+                            <div class="drawing-label">TOP VIEW</div>
+                            <div class="drawing-content">
+                                {svg_top}
+                            </div>
                         </div>
-                        </div>
-                        """
+                        """, unsafe_allow_html=True)
                     
-                        front_container = f"""
-                        <div style="border:1px solid #ddd;border-radius:8px;padding:10px;height:320px;display:flex;flex-direction:column;">
-                        <div style="font:bold 12px Helvetica, Arial; margin: 2px 0 8px 0;">FRONT VIEW</div>
-                        <div style="flex:1;display:flex;align-items:center;justify-content:flex-start;">
-                        {svg_front}
+                        st.markdown(f"""
+                        <div class="drawing-card" style="height: 350px;">
+                            <div class="drawing-label">FRONT VIEW</div>
+                            <div class="drawing-content">
+                                {svg_front}
+                            </div>
                         </div>
-                        </div>
-                        """
+                        """, unsafe_allow_html=True)
+
+                        st.markdown('<div style="margin-top: 24px;"></div>', unsafe_allow_html=True)
                         
                         # Display with fixed heights
                         # st.subheader("Top View")
-                        html(top_container, height=350, scrolling=False)
+                        # html(top_container, height=350, scrolling=False)
                     
                         # st.subheader("Front View")
-                        html(front_container, height=350, scrolling=False)
+                        # html(front_container, height=350, scrolling=False)
 
                     tpl_bytes = fetch_template_pdf_bytes(TEMPLATE_URL)
                     if tpl_bytes:
