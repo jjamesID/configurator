@@ -27,6 +27,37 @@ st.set_page_config(
     layout="centered",
 )
 
+st.markdown("""
+    <style>
+        /* Remove top and bottom padding from the main block container */
+        div.block-container {
+            padding-top: 0px !important;
+            padding-bottom: 0px !important;
+        }
+
+        /* Remove Streamlit header padding (around st.logo) */
+        header[data-testid="stHeader"] {
+            margin-top: -40px !important;   /* Pulls app upward */
+            padding-top: 0px !important;
+            padding-bottom: 0px !important;
+        }
+
+        /* Remove padding at the very bottom of the page */
+        footer[data-testid="stFooter"] {
+            margin-bottom: -40px !important;
+            padding-bottom: 0px !important;
+        }
+
+        /* Optional: tighten sidebar spacing too (if needed) */
+        section[data-testid="stSidebar"] > div {
+            padding-top: 0px !important;
+            padding-bottom: 0px !important;
+        }
+    </style>
+""", unsafe_allow_html=True)
+
+
+
 # -----------------------------
 # Branding
 # -----------------------------
