@@ -32,7 +32,7 @@ st.markdown("""
         /* Tighten top & bottom padding of main content */
         div.block-container {
             padding-top: 0.00rem !important;   /* small gap under the logo */
-            padding-bottom: 0.25rem !important;
+            padding-bottom: 0.0rem !important;
         }
 
         /* Optional: slightly tighten sidebar padding too */
@@ -1383,4 +1383,5 @@ else:
     with left_col:
 
         st.info("Adjust the options on the right to generate the drawings automatically.")
+
 
