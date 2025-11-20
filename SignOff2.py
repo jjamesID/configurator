@@ -31,7 +31,7 @@ st.markdown("""
     <style>
         /* Tighten top & bottom padding of main content */
         div.block-container {
-            padding-top: 0.25rem !important;   /* small gap under the logo */
+            padding-top: 0.05rem !important;   /* small gap under the logo */
             padding-bottom: 0.25rem !important;
         }
 
@@ -1381,4 +1381,5 @@ if outlets and all(isinstance(v, (float, int)) for v in outlets):
 
 else:
     with left_col:
+
         st.info("Adjust the options on the right to generate the drawings automatically.")
