@@ -31,19 +31,129 @@ st.markdown("""
     <style>
         /* Tighten top & bottom padding of main content */
         div.block-container {
-            padding-top: 0.00rem !important;   /* small gap under the logo */
+            padding-top: 0.0rem !important;
             padding-bottom: 0.0rem !important;
+            max-width: 1400px;
         }
 
-        /* Optional: slightly tighten sidebar padding too */
+        /* Slightly tighten sidebar padding too */
         section[data-testid="stSidebar"] > div {
             padding-top: 0.25rem !important;
             padding-bottom: 0.25rem !important;
         }
+
+        /* Background gradient for the app (subtle) */
+        .main {
+            background: radial-gradient(circle at top left, #f5f7fb 0, #e5e9f2 40%, #f8fafc 100%);
+        }
+
+        /* Landing layout */
+        .id-landing-wrapper {
+            min-height: 70vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .id-landing-card {
+            background: #ffffff;
+            border-radius: 20px;
+            padding: 32px 28px 26px 28px;
+            max-width: 640px;
+            width: 100%;
+            box-shadow: 0 24px 60px rgba(15, 23, 42, 0.25);
+            border: 1px solid rgba(148, 163, 184, 0.35);
+            text-align: left;
+        }
+
+        .id-landing-pill {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            padding: 4px 12px;
+            border-radius: 999px;
+            background: #0f172a;
+            color: #e5e7eb;
+            font-size: 11px;
+            letter-spacing: 0.14em;
+            text-transform: uppercase;
+            margin-bottom: 10px;
+        }
+
+        .id-landing-pill span {
+            width: 7px;
+            height: 7px;
+            border-radius: 999px;
+            background: #22c55e;
+            display: inline-block;
+        }
+
+        .id-landing-title {
+            font-size: 1.6rem;
+            font-weight: 700;
+            color: #0f172a;
+            margin-bottom: 4px;
+        }
+
+        .id-landing-subtitle {
+            font-size: 0.96rem;
+            color: #4b5563;
+            margin-bottom: 16px;
+        }
+
+        .id-landing-meta {
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 0.12em;
+            color: #6b7280;
+            margin-bottom: 12px;
+        }
+
+        .id-landing-bullets {
+            font-size: 0.9rem;
+            color: #374151;
+            margin-bottom: 18px;
+        }
+
+        .id-landing-bullets li {
+            margin-bottom: 4px;
+        }
+
+        .id-landing-footer {
+            font-size: 0.75rem;
+            color: #9ca3af;
+            margin-top: 10px;
+        }
+
+        /* Global button styling (Begin + Download look nice) */
+        .stButton > button {
+            border-radius: 999px;
+            border: none;
+            padding: 0.6rem 1.4rem;
+            font-size: 0.9rem;
+            font-weight: 600;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            background: linear-gradient(120deg, #111827, #0ea5e9);
+            color: #f9fafb;
+            box-shadow: 0 10px 30px rgba(15, 23, 42, 0.45);
+            cursor: pointer;
+            transition: transform 0.12s ease, box-shadow 0.12s ease, opacity 0.12s ease;
+        }
+
+        .stButton > button:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 16px 40px rgba(15, 23, 42, 0.6);
+            opacity: 0.98;
+        }
+
+        .stButton > button:active {
+            transform: translateY(0);
+            box-shadow: 0 8px 20px rgba(15, 23, 42, 0.5);
+            opacity: 0.96;
+        }
     </style>
 """, unsafe_allow_html=True)
-
-
 
 # -----------------------------
 # Branding
@@ -1101,21 +1211,126 @@ def make_front_view_svg(A_in, flange_in, outlets_from_right_in, px_per_in=32, mo
 if "started" not in st.session_state:
     st.session_state["started"] = False
 
-# If NOT started → show the landing page and STOP
 if not st.session_state["started"]:
+
     st.markdown("""
-        <div style="text-align:center; margin-top:60px;">
-            <img src="https://uploads-ssl.webflow.com/61dd080b3d2f9fec43b08948/61e5d398a2373f0282831465_InfinityDrainLogo_blk.png" width="220"/>
-            <h2>Custom Configurator</h2>
-            <p>Generate shop drawings and sign-offs for FX, FF, FCS, and FCB channels.</p>
-        </div>
+    <style>
+        .main {
+            background: #f7f7f7;
+        }
+
+        .id-landing-wrapper {
+            min-height: 40vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 0;
+        }
+
+        .id-landing-card {
+            background: white;
+            border-radius: 18px;
+            padding: 28px 32px 24px 32px;
+            max-width: 640px;
+            width: 100%;
+            text-align: center;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+            border: 1px solid #d1d5db;
+        }
+
+        .id-landing-title {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: #111;
+            margin-top: 12px;
+            margin-bottom: 6px;
+        }
+
+        .id-landing-subtitle {
+            font-size: 1.0rem;
+            color: #4b5563;
+            margin-top: 4px;
+            margin-bottom: 4px;
+        }
+
+        /* Footer text under the button */
+        .id-landing-footer {
+            margin-top: 10px;
+            text-align: center;
+            color: #6b7280;
+            font-size: 0.75rem;
+        }
+
+        /* Button wrapper – pulls button closer to card */
+        .id-landing-button-wrap {
+            max-width: 420px;
+            margin: 8px auto 0 auto;  /* small gap under card */
+        }
+
+        /* BRAND BUTTON: black / dark grey, rounded pill */
+        .stButton > button {
+            width: 100%;
+            border-radius: 999px;
+            border: none;
+            padding: 0.75rem 1.4rem;
+            font-size: 0.9rem;
+            font-weight: 600;
+            letter-spacing: 0.06em;
+            text-transform: uppercase;
+
+            background: linear-gradient(135deg, #000000, #1f2937);
+            color: #f9fafb;
+
+            box-shadow: 0 8px 18px rgba(0,0,0,0.35);
+            cursor: pointer;
+            transition: transform 0.12s ease, box-shadow 0.12s ease, opacity 0.12s ease;
+        }
+        .stButton > button:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 12px 26px rgba(0,0,0,0.5);
+            opacity: 0.97;
+            color: #d1d5db;   /* text shifts to light gray */
+        }
+        .stButton > button:active {
+            transform: translateY(0px);
+            box-shadow: 0 6px 14px rgba(0,0,0,0.35);
+            opacity: 0.95;
+        }
+    </style>
     """, unsafe_allow_html=True)
 
-    if st.button("▶️ Begin", use_container_width=True):
-        st.session_state["started"] = True
-        st.rerun()  # Immediately refresh into configurator mode
+    # Card with logo, title, subtitle
+    st.markdown("""
+    <div class="id-landing-wrapper">
+      <div class="id-landing-card">
+        <img src="https://uploads-ssl.webflow.com/61dd080b3d2f9fec43b08948/61e5d398a2373f0282831465_InfinityDrainLogo_blk.png"
+             width="220">
+        <div class="id-landing-title">Custom Configurator</div>
+        <div class="id-landing-subtitle">
+            Generate shop drawings and sign-offs for FX, FF, FCS, and FCB channels.
+        <div class="id-landing-footer">
+            For questions or custom conditions, contact Infinity Drain Technical Support.
+        </div>
+      </div>
+    </div>
+    """, unsafe_allow_html=True)
 
-    st.stop()  # Do NOT render anything else
+    # Button visually tucked right under the card
+    col1, col2, col3 = st.columns([1, 2, 1]) 
+    with col2:
+        st.markdown('<div class="id-landing-button-wrap">', unsafe_allow_html=True)
+        begin = st.button("▶ Begin Configuration", use_container_width=True)
+        st.markdown('</div>', unsafe_allow_html=True)
+
+
+    if begin:
+        st.session_state["started"] = True
+        st.rerun()
+
+    st.stop()
+
+
+
 
 # -----------------------------
 # UI
@@ -1381,7 +1596,4 @@ if outlets and all(isinstance(v, (float, int)) for v in outlets):
 
 else:
     with left_col:
-
         st.info("Adjust the options on the right to generate the drawings automatically.")
-
-
