@@ -117,6 +117,30 @@ st.markdown("""
 </style>
 """, unsafe_allow_html=True)
 
+st.markdown("""
+<style>
+.config-header {
+    margin-top: 6rem;
+    margin-bottom: 0rem;
+}
+
+.config-pill {
+    display: inline-flex;
+    align-items: center;
+    padding: 0rem 5.6rem;
+    border-radius: 1px;
+    background: #111827;
+    color: white;
+    font-size: 2rem;
+    font-weight: 700;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    margin-bottom: -80px;
+}
+</style>
+""", unsafe_allow_html=True)
+
+
 # -----------------------------
 # Branding
 # -----------------------------
@@ -968,7 +992,7 @@ def make_top_view_svg(A_in, flange_in, outlets_from_right_in, px_per_in=32):
 
     total_w = int(Lpx_out + margin_px*2)
     total_h = int(Wpx_out + margin_px*2)
-    pad_top    = 0
+    pad_top    = -15
     pad_bottom = 0.0
 
     def line(x1,y1,x2,y2,stroke="#000",width=1):
@@ -1024,7 +1048,7 @@ def make_top_view_svg(A_in, flange_in, outlets_from_right_in, px_per_in=32):
     base_ah = 7.0
     ah = base_ah * size_scale
 
-    base_dy_offset = 30.0
+    base_dy_offset = 20.0
     dy = margin_px - base_dy_offset * pos_scale
     dy = max(20, dy)
 
@@ -1235,6 +1259,7 @@ if not st.session_state["started"]:
             text-align: center;
             box-shadow: 0 10px 30px rgba(0,0,0,0.15);
             border: 1px solid #d1d5db;
+            margin-bottom: -120px;
         }
 
         .id-landing-title {
@@ -1337,12 +1362,14 @@ if not st.session_state["started"]:
 left_col, right_col = st.columns([7, 5])
 
 with right_col:
-    st.write("")
-    st.write("")
-    st.write("")
-    st.write("")
-    st.title("Custom Configurator")
+    st.markdown("""
+    <div class="config-header">
+        <div class="config-pill">Custom Configurator</div>
+        </div>
+    </div>
+    """, unsafe_allow_html=True)
     st.divider()
+
     model_code = st.selectbox("Select Series", list(MODELS.keys()),
                             format_func=lambda k: MODELS[k])
 
@@ -1484,7 +1511,7 @@ with right_col:
 
 
     if model_code == "FX":
-        b_label_base = "Outlet from Right Outside Edge"
+        b_label_base = "Outlet from Outside Right Edge"
     else:
         b_label_base = "Outlet from Inside Right Edge"
 
