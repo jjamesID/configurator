@@ -68,10 +68,10 @@ st.markdown("""
     .drawing-label {
         background: linear-gradient(135deg, #000000, #1f2937);
         color: #f9fafb;
-        padding: 12px 16px;
+        padding: 4px 6px;
         font-weight: 600;
         font-size: 0.9rem;
-        letter-spacing: 0.05em;
+        letter-spacing: 0.15em;
     }
 
     .drawing-content {
@@ -88,7 +88,7 @@ st.markdown("""
             width: 100%;
             border-radius: 999px;
             border: none;
-            padding: 0.75rem 1.4rem;
+            padding: 0.75rem 4rem;
             font-size: 0.9rem;
             font-weight: 600;
             letter-spacing: 0.06em;
@@ -1318,7 +1318,7 @@ if not st.session_state["started"]:
     col1, col2, col3 = st.columns([1, 2, 1]) 
     with col2:
         st.markdown('<div class="id-landing-button-wrap">', unsafe_allow_html=True)
-        begin = st.button("▶ Begin Configuration", use_container_width=True)
+        begin = st.button("Begin Configuration", use_container_width=True)
         st.markdown('</div>', unsafe_allow_html=True)
 
 
@@ -1586,7 +1586,7 @@ if outlets and all(isinstance(v, (float, int)) for v in outlets):
                         final_pdf = merge_overlay_on_template_bytes(tpl_bytes, overlay)
                         with right_col:
                             st.download_button(
-                                "🧾 Download Shop Drawing",
+                                "Download Shop Drawing",
                                 data=final_pdf,
                                 file_name=f"{model_code} {A_in:.4f} Drawing.pdf",
                                 mime="application/pdf",
